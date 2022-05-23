@@ -1,1 +1,1 @@
-web: gunicorn blogsocial-ci-portfolio-4.wsgi
+web: gunicorn blogsocial.wsgi
