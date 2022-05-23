@@ -1,1 +1,1 @@
-web: gunicorn PROJ_NAME.wsgi
+web: gunicorn blogsocial-ci-portfolio-4.wsgi
