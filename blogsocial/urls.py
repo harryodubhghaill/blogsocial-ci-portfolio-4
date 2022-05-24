@@ -21,7 +21,13 @@ from blog.views import (
 )
 
 urlpatterns = [
+    # home screen
     path('', home_screen_view, name='home'),
+
+    # account urls
+    path('accounts/', include('allauth.urls')),
+
+    # admin urls
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls'))
 ]
