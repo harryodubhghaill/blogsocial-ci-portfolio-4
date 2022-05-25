@@ -48,6 +48,21 @@
             </div>
         </div>
     </nav>
+    <!-- messages -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                {% for message in messages %}
+
+                <div class="alert {{ message.tags }} alert-dismissable fade show" id="messages" role="alert">
+                    {{ message | safe }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
     <!-- main site content filled through other templates -->
     <main>
         {% block content %}
@@ -72,5 +87,13 @@
       </footer>
     <!-- font awesome script -->
     <script src="https://kit.fontawesome.com/83ca266074.js" crossorigin="anonymous"></script>
+    <!-- alert timeout js -->
+    <script>
+        setTimeout(function() {
+            let messages = document.getElementById('messages');
+            let alert = new bootstrap.Alert(messages);
+            alert.close();
+        }, 2000);
+    </script>
 </body>
 </html>
