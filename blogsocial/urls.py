@@ -16,13 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from blog.views import (
-    home_screen_view,
-)
-
 urlpatterns = [
     # home screen
-    path('', home_screen_view, name='home'),
+    path('', include('blog.urls'), name='blog_urls'),
 
     # account urls
     path('accounts/', include('allauth.urls')),
