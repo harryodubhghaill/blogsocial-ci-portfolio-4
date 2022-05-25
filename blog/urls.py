@@ -4,5 +4,5 @@ from django.urls import path
 urlpatterns = [
     path('', views.PostList.as_view(), name='home'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
-    path('like/<slug:slug>', views.PostLikes.as_view('post_like')),
+    path('like/<slug:slug>', views.PostLikes.as_view(), name='post_like'),
 ]
