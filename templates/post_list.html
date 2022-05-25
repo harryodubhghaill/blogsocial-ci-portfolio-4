@@ -21,7 +21,7 @@
                             <a href="#">
                                 <h4>{{ post.community }}</h4>
                             </a>
-                            <a href="#">
+                            <a href="{% url 'post_detail' post.slug %}">
                                 <h3>{{ post.title }}</h3>
                             </a>
                             {{ post.body }}
