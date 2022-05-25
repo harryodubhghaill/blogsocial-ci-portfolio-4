@@ -1,5 +1,7 @@
 {% extends 'base.html' %} 
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 
 <div class="masthead">
@@ -69,13 +71,21 @@
                     <!-- Main comment body -->
                     {{ comment.body | linebreaks }}
                 </div>
-                <!-- Our for loop ends here -->
                 {% endfor %}
             </div>
         </div>
+        <!-- add a comment -->
         <div class="col-md-4 card mb-4  mt-3 ">
             <div class="card-body">
-                <!-- For later -->
+                {% if user.is_authenticated %}
+                <h3><i class="far fa-comments"></i>Comment:</h3>
+                <p>Posting as: {{ user.username }}</p>
+                <form method="post" style="margin-top: 1.3em;">
+                    {{ comment_form | crispy }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-signup btn-lg">Comment</button>
+                </form>
+                {% endif %}
             </div>
         </div>
     </div>
