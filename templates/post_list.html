@@ -5,13 +5,60 @@
 <div class="container-fluid">
     <div class="row">
 
-        <!-- Blog Entries Column -->
+        <!-- Posts page -->
         <div class="col-12 mt-3 left">
             <div class="row">
+                <!-- individual posts -->
+                {% for post in post_list &}
+                <div class="col-md-4">
+                    <div class="card md-4">
+                        <div class="card-body">
+                            {% if 'placeholder' in post.image.url %}
+                            <!-- no image to display -->
+                            {% else %}
+                            <img src="{{ post.image.url }}" class="card-img-top">
+                            {% endif %}
+                            <a href="#">
+                                <h4>{{ blog.community }}</h4>
+                            </a>
+                            <a href="#">
+                                <h3>{{ blog.title }}</h3>
+                            </a>
+                            <p>{{ blog.body }}</p>
+                            <hr>
+                            <p>By: {{ blog.author }} at: {{ blog.created_on}}
+                                <i class="far fa-thumbs-up"></i>
+                                {{ post.number_of_likes }}
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% if forloop.counter|divisibleby:3 %}
+                </div>
+                <div class="row">
+                {% endif %}
+                {% endfor %}
 
             </div>
         </div>
     </div>
+<!-- paginate code -->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
 
 </div>
 
