@@ -1,0 +1,84 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<div class="masthead">
+    <div class="container">
+        <div class="row g-0">
+            <div class="col-md-6 masthead-text">
+                <!-- Post Title -->
+                <h2 class="post-title">{{ post.title }}</h2>
+                <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
+            </div>
+            <div class="d-none d-md-block col-md-6 masthead-image">
+                <!-- If no imge, dont display -->
+                {% if "placeholder" in post.image.url %}
+                {% else %}
+                <img src=" {{ post.image.url }}" width="100%">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col card mb-4  mt-3 left  top">
+            <div class="card-body">
+                <!-- Main Content with safe filter to render HTML -->
+                <p class="card-text ">
+                    {{ post.content | safe }}
+                </p>
+                <div class="row">
+
+                    <div class="col-1">
+                        <!-- The number of likes goes before the closing strong tag -->
+                        <strong class="text-secondary"><i class="far fa-heart"></i> {{ post.number_of_likes }} </strong>
+                    </div>
+                    <div class="col-1">
+                        {% with comments.count as total_comments %}
+                        <strong class="text-secondary"><i class="far fa-comments"></i>
+                            <!-- Comment count -->
+                            {{ total_comments }}</strong>
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 card mb-4  mt-3 ">
+            <h3>Comments:</h3>
+            <div class="card-body">
+                <!-- Comment for loop -->
+                {% for comment in comments %}
+                <div class="comments" style="padding: 10px;">
+                    <p class="font-weight-bold">
+                        <!-- Author of comment -->
+                        {{ comment.author }}
+                        <span class=" text-muted font-weight-normal">
+                            <!-- Created on -->
+                            {{ comment.created_on }}
+                        </span> wrote:
+                    </p>
+                    <!-- Main comment body -->
+                    {{ comment.body | linebreaks }}
+                </div>
+                <!-- Our for loop ends here -->
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-4 card mb-4  mt-3 ">
+            <div class="card-body">
+                <!-- For later -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
