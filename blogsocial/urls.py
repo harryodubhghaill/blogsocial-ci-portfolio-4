@@ -17,13 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    # home screen
-    path('', include('blog.urls'), name='blog_urls'),
-
-    # account urls
-    path('accounts/', include('allauth.urls')),
-
-    # admin urls
     path('admin/', admin.site.urls),
-    path('summernote/', include('django_summernote.urls'))
+    path("", include("blog.urls"), name="blog-urls"),
+    path('summernote/', include('django_summernote.urls')),
+    path("accounts/", include("allauth.urls")),
 ]
